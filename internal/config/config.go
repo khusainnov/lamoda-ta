@@ -16,10 +16,10 @@ const (
 type Config struct {
 	L              *zap.Logger
 	AppMode        AppMode       `env:"APP_MODE" envDefault:"local"`
-	RPCAddr        string        `env:"GRPC_ADDR" envDefault:":9000"`
+	RPCAddr        string        `env:"RPC_ADDR" envDefault:":9000"`
 	HTTPAddr       string        `env:"HTTP_ADDR" envDefault:":8000"`
-	PgPort         string        `env:"PG_PORT" envDefault:"5432"`
-	PgHost         string        `env:"PG_HOST" envDefault:"postgres-db"`
+	PgPort         string        `env:"PG_PORT" envDefault:"5434"`
+	PgHost         string        `env:"PG_HOST" envDefault:"localhost"`
 	PgName         string        `env:"PG_NAME" envDefault:"postgres"`
 	PgUser         string        `env:"PG_USER" envDefault:"postgres"`
 	PgPassword     string        `env:"PG_PASSWORD" envDefault:"qwerty"`
