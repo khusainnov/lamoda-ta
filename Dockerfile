@@ -15,4 +15,4 @@ COPY scheme ./scheme
 
 EXPOSE 9000 8000
 
-CMD ["./lamoda"]
+CMD ["/lamoda"]

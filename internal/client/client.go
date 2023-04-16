@@ -13,18 +13,18 @@ import (
 var l, _ = zap.NewProduction()
 
 func main() {
-	client, err := jsonrpc.Dial("tcp", "localhost:9000")
+	client, err := jsonrpc.Dial("tcp", "localhost:9001")
 	if err != nil {
 		log.Fatal("Dial error:", err)
 	}
 
-	//uploadProduct(client)
+	uploadProduct(client)
 	//updateProduct(client)
 	//getProduct(client)
 	//listProduct(client)
 	//deleteProduct(client)
 	//reserveProduct(client)
-	deleteReservation(client)
+	//deleteReservation(client)
 }
 
 func uploadProduct(client *rpc.Client) {
@@ -33,7 +33,7 @@ func uploadProduct(client *rpc.Client) {
 		Size:        "L",
 		Code:        "71241291",
 		Quantity:    51,
-		WarehouseID: "d2129f75-8368-4269-82f0-58cf0d7305f8",
+		WarehouseID: "433772c7-f85c-468c-9b59-a912d9231e47",
 	}
 
 	var resp model.UploadProductResponse
