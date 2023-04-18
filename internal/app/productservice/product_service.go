@@ -18,7 +18,7 @@ type Product interface {
 
 type Reservation interface {
 	ReserveProduct(req model.ReserveProductRequest, resp *model.Response) error
-	CancelReservation(req model.CancelReservationRequest, resp *model.Response) error
+	ReleaseReserve(req model.ReleaseReserveRequest, resp *model.Response) error
 }
 
 type ProductImpl struct {

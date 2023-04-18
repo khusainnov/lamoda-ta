@@ -13,27 +13,27 @@ import (
 var l, _ = zap.NewProduction()
 
 func main() {
-	client, err := jsonrpc.Dial("tcp", "localhost:9001")
+	client, err := jsonrpc.Dial("tcp", "localhost:80")
 	if err != nil {
 		log.Fatal("Dial error:", err)
 	}
 
-	uploadProduct(client)
+	//uploadProduct(client)
 	//updateProduct(client)
 	//getProduct(client)
 	//listProduct(client)
 	//deleteProduct(client)
 	//reserveProduct(client)
-	//deleteReservation(client)
+	releaseReserve(client)
 }
 
 func uploadProduct(client *rpc.Client) {
 	req := model.UploadProductRequest{
-		Name:        "Zara shirt",
-		Size:        "L",
-		Code:        "71241291",
-		Quantity:    51,
-		WarehouseID: "433772c7-f85c-468c-9b59-a912d9231e47",
+		Name:        "Hoodie",
+		Size:        "50/52",
+		Code:        "33278291",
+		Quantity:    131,
+		WarehouseID: "1e8d248b-eca8-423d-b0f7-cdd11f959775",
 	}
 
 	var resp model.UploadProductResponse
@@ -42,31 +42,32 @@ func uploadProduct(client *rpc.Client) {
 		l.Fatal("error due call rpc", zap.Error(err))
 	}
 
-	fmt.Printf("Item: %v \tID: %s\n", req.Name, resp.Message)
+	fmt.Println(resp)
 }
 
 func updateProduct(client *rpc.Client) {
 	req := model.UpdateProductRequest{
-		Name:        "Zara pants",
+		Name:        "Pants",
 		Size:        "52/54",
-		Code:        "71241290",
-		Quantity:    101,
-		WarehouseID: "d2129f75-8368-4269-82f0-58cf0d7305f8",
+		Code:        "33278291",
+		Quantity:    130,
+		WarehouseID: "1e8d248b-eca8-423d-b0f7-cdd11f959775",
 	}
 
-	err := client.Call("ProductImpl.UpdateProduct", req, nil)
+	var resp model.Response
+	err := client.Call("ProductImpl.UpdateProduct", req, &resp)
 	if err != nil {
 		l.Fatal("error due call rpc", zap.Error(err))
 	}
 
-	fmt.Printf("Product: %v\n", req.Name)
+	fmt.Println(resp)
 
 }
 
 func getProduct(client *rpc.Client) {
 	req := model.GetProductRequest{
-		ProductCode: "71241290",
-		WarehouseID: "d2129f75-8368-4269-82f0-58cf0d7305f8",
+		ProductCode: "73271291",
+		WarehouseID: "ce6ba671-e63c-4bd9-99af-f2f0cd110498",
 	}
 
 	var resp model.Product
@@ -81,7 +82,7 @@ func getProduct(client *rpc.Client) {
 
 func listProduct(client *rpc.Client) {
 	req := model.ListProductRequest{
-		WarehouseID: "c795cf7e-fa28-4946-a2cf-3a41a687815f",
+		WarehouseID: "ce6ba671-e63c-4bd9-99af-f2f0cd110498",
 	}
 
 	var resp []model.Product
@@ -95,45 +96,50 @@ func listProduct(client *rpc.Client) {
 
 func deleteProduct(client *rpc.Client) {
 	req := model.DeleteProductRequest{
-		ProductCode: "544724293",
-		WarehouseID: "8e640e03-4540-4d07-a6ba-c0b62fa75335",
+		ProductCode: "33278291",
+		WarehouseID: "1e8d248b-eca8-423d-b0f7-cdd11f959775",
 	}
 
-	err := client.Call("ProductImpl.DeleteProduct", req, nil)
+	var resp model.Response
+	err := client.Call("ProductImpl.DeleteProduct", req, &resp)
 	if err != nil {
-		l.Fatal("error due call rpc", zap.Error(err))
+		l.Fatal("error due call rpc", zap.Any("response", resp), zap.Error(err))
 	}
 
-	fmt.Printf("Req: %v\n", req)
+	fmt.Println(resp)
 }
 
 func reserveProduct(client *rpc.Client) {
 	req := model.ReserveProductRequest{
 		ProductCode: []string{
-			"162705324",
-			"542242324",
+			"73278291",
 		},
-		WarehouseID: "c795cf7e-fa28-4946-a2cf-3a41a687815f",
-		Quantity:    20,
+		WarehouseID: "ce6ba671-e63c-4bd9-99af-f2f0cd110498",
+		Quantity:    17,
 	}
 
-	err := client.Call("ProductImpl.ReserveProduct", req, nil)
+	var resp model.Response
+	err := client.Call("ProductImpl.ReserveProduct", req, &resp)
 	if err != nil {
 		l.Fatal("error due call rpc", zap.Error(err))
 	}
 
+	fmt.Println(resp)
 }
 
-func deleteReservation(client *rpc.Client) {
-	req := model.CancelReservationRequest{
+func releaseReserve(client *rpc.Client) {
+	req := model.ReleaseReserveRequest{
 		ProductCode: []string{
-			"162705324",
+			"33278291",
 		},
-		WarehouseID: "c795cf7e-fa28-4946-a2cf-3a41a687815f",
+		WarehouseID: "72d49a8d-4d6d-4371-8c94-83e5d5dc0e99",
 	}
 
-	err := client.Call("ProductImpl.CancelReservation", req, nil)
+	var resp model.Response
+	err := client.Call("ProductImpl.ReleaseReserve", req, &resp)
 	if err != nil {
 		l.Fatal("error due call rpc", zap.Error(err))
 	}
+
+	fmt.Println(resp)
 }

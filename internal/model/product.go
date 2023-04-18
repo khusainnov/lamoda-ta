@@ -60,7 +60,7 @@ type ReserveProductRequest struct {
 	Quantity    int      `json:"quantity"`
 }
 
-type CancelReservationRequest struct {
+type ReleaseReserveRequest struct {
 	ProductCode []string `json:"product_code"`
 	WarehouseID string   `json:"warehouse_id"`
 }
@@ -69,4 +69,6 @@ type UploadProductResponse struct {
 	Message ResponseMsg `json:"message,omitempty"`
 }
 
-type Response struct{}
+type Response struct {
+	Message ResponseMsg `json:"message,omitempty"`
+}

@@ -17,7 +17,7 @@ type Product interface {
 // Reservation interface contains methods for working with item reservation
 type Reservation interface {
 	ReserveProduct(data model.ReserveProductRequest) error
-	DeleteReservation(data model.CancelReservationRequest) error
+	ReleaseReserve(data model.ReleaseReserveRequest) error
 }
 
 type Repository struct {

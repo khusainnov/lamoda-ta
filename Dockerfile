@@ -13,6 +13,6 @@ FROM gcr.io/distroless/base-debian11
 COPY --from=build app/lamoda .
 COPY scheme ./scheme
 
-EXPOSE 9000 8000
+EXPOSE 80
 
 CMD ["/lamoda"]

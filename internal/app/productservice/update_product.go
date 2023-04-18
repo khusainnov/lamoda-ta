@@ -12,8 +12,10 @@ func (p *ProductImpl) UpdateProduct(req model.UpdateProductRequest, resp *model.
 	defer p.mu.Unlock()
 
 	if err := p.repo.UpdateProduct(req); err != nil {
+		resp.Message = model.RequestErr
 		return fmt.Errorf("cannot update product, %w", err)
 	}
+	resp.Message = model.RequestOk
 
 	return nil
 }

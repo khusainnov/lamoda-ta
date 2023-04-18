@@ -11,6 +11,7 @@ func (p *ProductImpl) UploadProduct(req model.UploadProductRequest, resp *model.
 	p.l.Info("Product", zap.Any("Name", req.Name))
 
 	if err := p.repo.UploadProduct(req); err != nil {
+		resp.Message = model.RequestErr
 		return fmt.Errorf("cannot upload product, %w", err)
 	}
 

@@ -14,10 +14,10 @@ d-stop:
 	docker stop postgres
 
 d-exec:
-	docker exec -it postgres /bin/bash
+	docker exec -it rpc-app-db_v1.0 /bin/bash
 
 m-up:
-	migrate -path ./scheme -database 'postgres://postgres:qwerty@localhost:5434/postgres?sslmode=disable' up
+	migrate -path ./scheme -database 'postgres://postgres:qwerty@localhost:5435/postgres?sslmode=disable' up
 
 m-down:
-	migrate -path ./scheme -database 'postgres://postgres:qwerty@localhost:5434/postgres?sslmode=disable' down
+	migrate -path ./scheme -database 'postgres://postgres:qwerty@localhost:5435/postgres?sslmode=disable' down

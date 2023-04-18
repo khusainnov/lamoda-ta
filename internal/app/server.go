@@ -10,7 +10,6 @@ import (
 	"github.com/khusainnov/lamoda/internal/app/productservice"
 	"github.com/khusainnov/lamoda/internal/config"
 	"github.com/khusainnov/lamoda/internal/db"
-	"github.com/khusainnov/lamoda/internal/http"
 	"github.com/khusainnov/lamoda/internal/repository"
 	"go.uber.org/zap"
 )
@@ -20,9 +19,6 @@ func Run(ctx context.Context, cfg *config.Config) error {
 	if err != nil {
 		return fmt.Errorf("cannot create listener, %w", err)
 	}
-
-	httpServer := http.New(cfg)
-	httpServer.Start()
 
 	dbClient, err := db.NewClient(cfg)
 	if err != nil {

@@ -27,12 +27,12 @@ func (r *ReservationRepository) ReserveProduct(data model.ReserveProductRequest)
 	return nil
 }
 
-func (r *ReservationRepository) DeleteReservation(data model.CancelReservationRequest) error {
-	query := fmt.Sprintln("DELETE FROM reservation_table WHERE code=$1 AND warehouse_id=$2;")
+func (r *ReservationRepository) ReleaseReserve(data model.ReleaseReserveRequest) error {
+	query := fmt.Sprintln("UPDATE reservation_table SET departured=true WHERE code=$1 AND warehouse_id=$2;")
 
 	for _, code := range data.ProductCode {
 		if _, err := r.db.Exec(query, code, data.WarehouseID); err != nil {
-			return fmt.Errorf("cannot delete reservation, %w", err)
+			return fmt.Errorf("cannot release reserve, %w", err)
 		}
 	}
 

@@ -13,8 +13,10 @@ func (p *ProductImpl) DeleteProduct(req model.DeleteProductRequest, resp *model.
 	defer p.mu.Unlock()
 
 	if err := p.repo.DeleteProduct(req); err != nil {
+		resp.Message = model.RequestErr
 		return fmt.Errorf("error due deleting product")
 	}
+	resp.Message = model.RequestOk
 
 	return nil
 }

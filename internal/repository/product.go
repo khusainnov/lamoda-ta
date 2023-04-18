@@ -61,7 +61,7 @@ func (p *ProductRepository) ListProduct(data model.ListProductRequest) (*[]model
 func (p *ProductRepository) DeleteProduct(data model.DeleteProductRequest) error {
 	query := fmt.Sprintln("DELETE FROM product_table WHERE code=$1 and warehouse_id=$2;")
 
-	if _, err := p.db.Exec(query, data.ProductCode, data.WarehouseID); err != nil {
+	if err := p.db.QueryRow(query, data.ProductCode, data.WarehouseID).Err(); err != nil {
 		return fmt.Errorf("cannot delete product, %w", err)
 	}
 
