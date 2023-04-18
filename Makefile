@@ -1,5 +1,3 @@
-
-
 run:
 	go run cmd/lamoda/main.go
 test:

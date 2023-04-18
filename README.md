@@ -4,6 +4,11 @@
 
 ## Service for track items in every warehouse
 
+### For start the service use `docker-compose up`
+### When server start use `make m-up` for up migrations
+### Now you can use service
+### Request examples from client in `internal/app/client/client.go`
+
 ## API Description
 
 * ### UploadProduct
